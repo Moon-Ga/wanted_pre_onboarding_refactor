@@ -1,11 +1,11 @@
-import { useState } from "react";
-import "./App.css";
-import Dropdown from "./components/Dropdown";
-import Input from "./components/Input";
-import Slider from "./components/Slider";
-import Tab from "./components/Tab";
-import Toggle from "./components/Toggle";
-import { countryList, kboTeamList } from "./data/DropdownData";
+import { useState } from 'react';
+import './App.css';
+import Dropdown from './components/Dropdown';
+import Input from './components/Input';
+import Slider from './components/Slider';
+import Tab from './components/Tab';
+import Toggle from './components/Toggle';
+import { countryList, kboTeamList } from './data/DropdownData';
 
 function App() {
   const [firstToggle, setFirstToggle] = useState(false);
@@ -14,11 +14,11 @@ function App() {
   const [firstSlider, setFirstSlider] = useState(0);
   const [secondSlider, setSecondSlider] = useState(0);
 
-  const [firstDropdown, setFirstDropdown] = useState("");
-  const [secondDropdown, setSecondDropdown] = useState("");
+  const [firstDropdown, setFirstDropdown] = useState('');
+  const [secondDropdown, setSecondDropdown] = useState('');
 
-  const [inputEmail, setInputEmail] = useState("");
-  const [inputPassword, setInputPassword] = useState("");
+  const [inputEmail, setInputEmail] = useState('');
+  const [inputPassword, setInputPassword] = useState('');
 
   const componentsArray = [
     <>
@@ -26,19 +26,19 @@ function App() {
         usage="description"
         isToggled={firstToggle}
         setIsToggled={setFirstToggle}
-        label={["기본", "상세"]}
+        label={['기본', '상세']}
       />
       <Toggle
         usage="disabled"
         isToggled={secondToggle}
         setIsToggled={setSecondToggle}
-        label={["It's", "Disabled"]}
-        disabled={true}
+        label={["It's", 'Disabled']}
+        disabled
       />
     </>,
     <>
       <Tab />
-      <Tab tabs={["전체", "한식", "중식", "양식", "일식", "분식"]} />
+      <Tab tabs={['전체', '한식', '중식', '양식', '일식', '분식']} />
     </>,
     <>
       <Slider value={firstSlider} setValue={setFirstSlider} />
@@ -66,24 +66,23 @@ function App() {
         direction="up"
       />
     </>,
-    <Input
-      inputEmail={inputEmail}
-      setInputEmail={setInputEmail}
-      inputPassword={inputPassword}
-      setInputPassword={setInputPassword}
-    />,
+    <Input setInputEmail={setInputEmail} setInputPassword={setInputPassword} />,
   ];
 
   return (
     <div>
-      {componentsArray.map((components, idx) => (
-        <div
-          key={idx}
-          className="min-w-[1024px] w-full min-h-[200px] h-[20vh] flex justify-center items-center border-2"
-        >
-          <div className="grid grid-flow-col gap-14">{components}</div>
-        </div>
-      ))}
+      {componentsArray.map((components, idx) => {
+        const key = `components-key-${idx}`;
+
+        return (
+          <div
+            key={key}
+            className="min-w-[1024px] w-full min-h-[200px] h-[20vh] flex justify-center items-center border-2"
+          >
+            <div className="grid grid-flow-col gap-14">{components}</div>
+          </div>
+        );
+      })}
     </div>
   );
 }

@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-const Slider = ({
+function Slider({
   value,
   setValue,
   min = 0,
   max = 100,
   step = 1,
   buttonCount = 5,
-}) => {
+}) {
   const [buttons, setButtons] = useState([]);
 
   useEffect(() => {
@@ -27,13 +27,13 @@ const Slider = ({
   const sliderBackground = `linear-gradient(to right,rgb(6 182 212) ${ratio}%, rgb(209 213 219) ${ratio}%)`;
   const buttonBackground = (idx) => {
     if (ratio >= (100 / (buttonCount - 1)) * idx) {
-      return "rgb(6 182 212)";
+      return 'rgb(6 182 212)';
     }
   };
 
   const changeValue = (e) => {
     let value;
-    if (e.target.type === "range") {
+    if (e.target.type === 'range') {
       value = e.target.value;
     } else {
       value = e.target.innerText;
@@ -62,7 +62,7 @@ const Slider = ({
             key={idx}
             className="absolute top-1/4 w-[15px] h-[15px] rounded-full bg-gray-300 -z-10"
             style={{
-              left: (100 / (buttonCount - 1)) * idx + "%",
+              left: (100 / (buttonCount - 1)) * idx + '%',
               backgroundColor: buttonBackground(idx),
             }}
           />
@@ -81,6 +81,5 @@ const Slider = ({
       </div>
     </div>
   );
-};
-
+}
 export default Slider;

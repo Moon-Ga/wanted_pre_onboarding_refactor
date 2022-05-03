@@ -1,12 +1,12 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-const Dropdown = ({
+function Dropdown({
   selected,
   setSelected,
   list,
-  placeholder = "Select an Item",
-  direction = "down",
-}) => {
+  placeholder = 'Select an Item',
+  direction = 'down',
+}) {
   const [dropdownList, setdropdownList] = useState(list);
   const [showDropdown, setShowDropdown] = useState(false);
 
@@ -31,7 +31,7 @@ const Dropdown = ({
   };
 
   const resetSearch = () => {
-    searchInputRef.current.value = "";
+    searchInputRef.current.value = '';
     searchInputRef.current.focus();
     setdropdownList(list);
   };
@@ -44,9 +44,9 @@ const Dropdown = ({
 
   useEffect(() => {
     if (showDropdown) {
-      document.addEventListener("click", outerClick);
+      document.addEventListener('click', outerClick);
     } else {
-      document.removeEventListener("click", outerClick);
+      document.removeEventListener('click', outerClick);
     }
   }, [showDropdown, outerClick]);
 
@@ -58,27 +58,27 @@ const Dropdown = ({
           placeholder={placeholder}
           value={selected}
           className={`border-2 w-full pl-2 ${
-            showDropdown ? "border-cyan-500" : ""
+            showDropdown ? 'border-cyan-500' : ''
           } cursor-pointer focus:outline-none`}
         />
         <span
           className={`material-icons h-full border-2 absolute right-0 ${
-            showDropdown ? "border-cyan-500" : ""
+            showDropdown ? 'border-cyan-500' : ''
           } cursor-pointer`}
         >
-          {direction === "up"
+          {direction === 'up'
             ? showDropdown
-              ? "expand_more"
-              : "expand_less"
+              ? 'expand_more'
+              : 'expand_less'
             : showDropdown
-            ? "expand_less"
-            : "expand_more"}
+            ? 'expand_less'
+            : 'expand_more'}
         </span>
       </div>
       {showDropdown && (
         <div
           className={`absolute ${
-            direction === "up" ? "-top-8" : "top-8"
+            direction === 'up' ? '-top-8' : 'top-8'
           } w-full z-10`}
         >
           <input
@@ -100,7 +100,7 @@ const Dropdown = ({
           </span>
           <ul
             className={`${
-              direction === "up" ? "absolute w-full -top-[150px]" : ""
+              direction === 'up' ? 'absolute w-full -top-[150px]' : ''
             } h-[150px] overflow-auto border-2 bg-gray-50`}
           >
             {dropdownList.map((item, idx) => (
@@ -117,6 +117,5 @@ const Dropdown = ({
       )}
     </div>
   );
-};
-
+}
 export default Dropdown;

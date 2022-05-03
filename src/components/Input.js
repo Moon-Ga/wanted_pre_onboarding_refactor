@@ -1,11 +1,6 @@
-import { useRef, useState } from "react";
+import { useRef, useState } from 'react';
 
-const Input = ({
-  inputEmail,
-  setInputEmail,
-  inputPassword,
-  setInputPassword,
-}) => {
+function Input({ setInputEmail, setInputPassword }) {
   const [isValid, setIsValid] = useState({ Email: false, Password: false });
   const [invalidAlert, setInvalidAlert] = useState({
     Email: false,
@@ -17,7 +12,7 @@ const Input = ({
 
   const onInputChange = (e) => {
     const { value, type } = e.target;
-    if (type === "email") {
+    if (type === 'email') {
       setInputEmail(value);
     } else {
       setInputPassword(value);
@@ -36,10 +31,10 @@ const Input = ({
 
   const togglePasswordVisibility = () => {
     if (passwordVisible) {
-      passwordRef.current.type = "password";
+      passwordRef.current.type = 'password';
       setPasswordVisible(false);
     } else {
-      passwordRef.current.type = "text";
+      passwordRef.current.type = 'text';
       setPasswordVisible(true);
     }
   };
@@ -54,14 +49,14 @@ const Input = ({
           title="Type your Email."
           placeholder="name@example.com"
           className={`w-full pl-2 pr-8 border-2 leading-loose placeholder:italic ${
-            isValid.email ? "border-cyan-500" : ""
-          } ${invalidAlert.email ? "border-red-500" : ""}`}
+            isValid.email ? 'border-cyan-500' : ''
+          } ${invalidAlert.email ? 'border-red-500' : ''}`}
           onChange={onInputChange}
           onBlur={onInputBlur}
         />
         <span
           className={`material-icons absolute right-1 translate-y-1/4 ${
-            isValid.email ? "text-cyan-500" : "text-gray-300"
+            isValid.email ? 'text-cyan-500' : 'text-gray-300'
           }`}
         >
           check_circle
@@ -81,16 +76,16 @@ const Input = ({
           onChange={onInputChange}
           onBlur={onInputBlur}
           className={`w-full pl-2 pr-8 border-2 leading-loose placeholder:italic ${
-            isValid.password ? "border-cyan-500" : ""
-          } ${invalidAlert.password ? "border-red-500" : ""}`}
+            isValid.password ? 'border-cyan-500' : ''
+          } ${invalidAlert.password ? 'border-red-500' : ''}`}
         />
         <span
           onClick={togglePasswordVisibility}
           className={`material-icons absolute right-1 translate-y-1/4 ${
-            passwordVisible ? "text-cyan-500" : "text-gray-300"
+            passwordVisible ? 'text-cyan-500' : 'text-gray-300'
           } cursor-pointer`}
         >
-          {passwordVisible ? "visibility" : "visibility_off"}
+          {passwordVisible ? 'visibility' : 'visibility_off'}
         </span>
         {invalidAlert.password && (
           <span className="text-xs text-red-500">Password is too short</span>
@@ -98,6 +93,5 @@ const Input = ({
       </div>
     </div>
   );
-};
-
+}
 export default Input;

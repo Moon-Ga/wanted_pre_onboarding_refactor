@@ -1,10 +1,4 @@
-const Toggle = ({
-  usage,
-  isToggled,
-  setIsToggled,
-  label,
-  disabled = false,
-}) => {
+function Toggle({ usage, isToggled, setIsToggled, label, disabled = false }) {
   const changeToggle = (e) => setIsToggled(e.target.checked);
 
   return (
@@ -15,19 +9,19 @@ const Toggle = ({
       >
         <div
           className={`absolute ${
-            isToggled ? "left-1/2" : "left-0"
+            isToggled ? 'left-1/2' : 'left-0'
           } w-1/2 h-full bg-white rounded-full border-gray-300 border-2 transition-all`}
         />
         <span
           className={`z-10 ${
-            isToggled ? "text-gray-400" : "text-lg font-bold"
+            isToggled ? 'text-gray-400' : 'text-lg font-bold'
           } select-none`}
         >
           {label && label[0]}
         </span>
         <span
           className={`z-10 ${
-            isToggled ? "text-lg font-bold" : "text-gray-400"
+            isToggled ? 'text-lg font-bold' : 'text-gray-400'
           } select-none`}
         >
           {label && label[1]}
@@ -43,6 +37,5 @@ const Toggle = ({
       />
     </>
   );
-};
-
+}
 export default Toggle;
