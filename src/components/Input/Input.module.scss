@@ -1,0 +1,104 @@
+@use '/src/styles/constants/colors';
+@mixin input {
+  width: 100%;
+  padding-right: 2rem;
+  padding-left: 0.5rem;
+  line-height: 2;
+  border: 2px solid colors.$BLACK;
+}
+@mixin icon {
+  position: absolute;
+  right: 0.25rem;
+  color: colors.$GRAY-300;
+  transform: translateY(25%);
+}
+@mixin message {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: colors.$RED-500;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+
+  &::after {
+    margin-left: 0.125rem;
+    color: colors.$RED-500;
+    content: '';
+  }
+
+  .email {
+    position: relative;
+
+    &::before {
+      font-size: 0.75rem;
+      line-height: 1rem;
+      content: 'Email';
+    }
+
+    .emailInput {
+      @include input;
+
+      &::placeholder {
+        font-style: italic;
+      }
+    }
+
+    .emailValid {
+      border: 2px solid colors.$CYAN-500;
+    }
+
+    .emailAlert {
+      border: 2px solid colors.$RED-500;
+    }
+
+    .emailIcon {
+      @include icon;
+    }
+
+    .iconValid {
+      color: colors.$CYAN-500;
+    }
+  }
+
+  .emailAlertMessage {
+    @include message;
+  }
+
+  .password {
+    position: relative;
+
+    &::before {
+      font-size: 0.75rem;
+      line-height: 1rem;
+      content: 'Password';
+    }
+
+    .passwordInput {
+      @include input;
+    }
+
+    .passwordValid {
+      border: 2px solid colors.$CYAN-500;
+    }
+
+    .passwordAlert {
+      border: 2px solid colors.$RED-500;
+    }
+
+    .passwordIcon {
+      @include icon;
+      cursor: pointer;
+    }
+
+    .iconVisible {
+      color: colors.$CYAN-500;
+    }
+  }
+
+  .passwordAlertMessage {
+    @include message;
+  }
+}

@@ -1,0 +1,17 @@
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/constants/colors';
+
+.container {
+  @include flexbox.flexbox(center, center);
+  width: 100%;
+  min-width: 1024px;
+  height: 20vh;
+  min-height: 200px;
+  border: 2px solid colors.$BLACK;
+
+  .component {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 3.5rem;
+  }
+}

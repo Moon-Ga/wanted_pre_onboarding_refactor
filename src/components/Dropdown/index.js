@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import styles from './Dropdown.module.scss';
 
 function Dropdown({
   selected,
@@ -21,12 +22,12 @@ function Dropdown({
   };
 
   const toggleDropdownList = () => {
-    setShowDropdown(!showDropdown);
+    setShowDropdown((prev) => !prev);
     setdropdownList(list);
   };
 
   const selectValue = (e) => {
-    setSelected(e.target.innerText);
+    setSelected(e.target.id);
     toggleDropdownList();
   };
 
@@ -42,6 +43,20 @@ function Dropdown({
     }
   }, []);
 
+  const dropdownArrow = () => {
+    if (direction === 'up') {
+      if (showDropdown) {
+        return 'expand_more';
+      }
+      return 'expand_less';
+    }
+
+    if (showDropdown) {
+      return 'expand_less';
+    }
+    return 'expand_more';
+  };
+
   useEffect(() => {
     if (showDropdown) {
       document.addEventListener('click', outerClick);
@@ -51,67 +66,70 @@ function Dropdown({
   }, [showDropdown, outerClick]);
 
   return (
-    <div ref={containerRef} className="relative flex flex-col w-[300px]">
-      <div onClick={toggleDropdownList} className="relative">
+    <div ref={containerRef} className={styles.container}>
+      <div
+        role="menu"
+        tabIndex={0}
+        onClick={toggleDropdownList}
+        className={styles.dropdownContainer}
+      >
         <input
           readOnly
           placeholder={placeholder}
           value={selected}
-          className={`border-2 w-full pl-2 ${
-            showDropdown ? 'border-cyan-500' : ''
-          } cursor-pointer focus:outline-none`}
+          className={`${styles.dropdownInput} ${
+            showDropdown ? styles.dropdownOn : ''
+          }`}
         />
         <span
-          className={`material-icons h-full border-2 absolute right-0 ${
-            showDropdown ? 'border-cyan-500' : ''
-          } cursor-pointer`}
+          className={`material-icons ${styles.dropdownArrow} ${
+            showDropdown ? styles.dropdownOn : ''
+          }`}
         >
-          {direction === 'up'
-            ? showDropdown
-              ? 'expand_more'
-              : 'expand_less'
-            : showDropdown
-            ? 'expand_less'
-            : 'expand_more'}
+          {dropdownArrow()}
         </span>
       </div>
       {showDropdown && (
         <div
-          className={`absolute ${
-            direction === 'up' ? '-top-8' : 'top-8'
-          } w-full z-10`}
+          className={`${direction === 'up' ? styles.upward : ''} ${
+            styles.dropdownList
+          }`}
         >
           <input
             ref={searchInputRef}
-            autoFocus
             type="text"
             placeholder="Search Country"
-            className="border-2 pl-7 w-full focus:outline-none"
+            className={styles.search}
             onChange={filterList}
           />
-          <span className="material-icons absolute top-[4px] left-1 text-[20px] text-gray-300">
-            search
-          </span>
+          <span className={`material-icons ${styles.searchIcon}`}>search</span>
           <span
+            role="button"
+            tabIndex={0}
             onClick={resetSearch}
-            className="material-icons absolute top-[4px] right-1 text-[20px] text-gray-300 cursor-pointer"
+            className={`material-icons ${styles.reset}`}
           >
             cancel
           </span>
           <ul
-            className={`${
-              direction === 'up' ? 'absolute w-full -top-[150px]' : ''
-            } h-[150px] overflow-auto border-2 bg-gray-50`}
+            className={`${direction === 'up' ? styles.up : ''} ${styles.list}`}
           >
-            {dropdownList.map((item, idx) => (
-              <li
-                key={idx}
-                onClick={selectValue}
-                className="pl-7 cursor-pointer hover:bg-gray-200"
-              >
-                {item}
-              </li>
-            ))}
+            {dropdownList.map((item, idx) => {
+              const key = `dropdown-list-key-${idx}`;
+
+              return (
+                <li
+                  id={item}
+                  key={key}
+                  role="menuitem"
+                  tabIndex={-1}
+                  onClick={selectValue}
+                  className={styles.item}
+                >
+                  {item}
+                </li>
+              );
+            })}
           </ul>
         </div>
       )}

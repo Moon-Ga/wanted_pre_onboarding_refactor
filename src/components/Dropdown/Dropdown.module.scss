@@ -1,0 +1,98 @@
+@use '/src/styles/constants/colors';
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+
+  .dropdownContainer {
+    position: relative;
+
+    .dropdownInput {
+      width: 100%;
+      padding-left: 0.5rem;
+      cursor: pointer;
+      border: 2px solid colors.$BLACK;
+
+      &:focus {
+        outline: 0;
+      }
+    }
+
+    .dropdownArrow {
+      position: absolute;
+      right: 0;
+      height: 100%;
+      cursor: pointer;
+      border: 2px solid colors.$BLACK;
+    }
+
+    .dropdownOn {
+      border-color: colors.$CYAN-500;
+    }
+  }
+
+  .dropdownList {
+    position: absolute;
+    top: 2rem;
+    z-index: 10;
+    width: 100%;
+
+    .search {
+      width: 100%;
+      padding-left: 1.75rem;
+      border: 2px solid colors.$BLACK;
+
+      &:focus {
+        outline: 0;
+      }
+    }
+
+    .searchIcon,
+    .reset {
+      position: absolute;
+      top: 4px;
+      font-size: 20px;
+      color: colors.$GRAY-300;
+    }
+
+    .searchIcon {
+      left: 0.25rem;
+    }
+
+    .reset {
+      right: 0.25rem;
+      cursor: pointer;
+    }
+
+    .list {
+      height: 150px;
+      overflow: auto;
+      background-color: colors.$GRAY-100;
+      border-color: colors.$BLACK;
+      border-style: solid;
+      border-width: 0 2px 2px;
+
+      .item {
+        padding-left: 1.75rem;
+        cursor: pointer;
+
+        &:hover {
+          background-color: colors.$GRAY-300;
+        }
+      }
+    }
+
+    .up {
+      position: absolute;
+      top: -150px;
+      width: 100%;
+      border-width: 2px 2px 0;
+    }
+  }
+
+  .upward {
+    top: -2rem;
+  }
+}

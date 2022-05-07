@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './App.css';
+import styles from './App.module.scss';
 import Dropdown from './components/Dropdown';
 import Input from './components/Input';
 import Slider from './components/Slider';
@@ -66,7 +66,12 @@ function App() {
         direction="up"
       />
     </>,
-    <Input setInputEmail={setInputEmail} setInputPassword={setInputPassword} />,
+    <Input
+      inputEmail={inputEmail}
+      setInputEmail={setInputEmail}
+      inputPassword={inputPassword}
+      setInputPassword={setInputPassword}
+    />,
   ];
 
   return (
@@ -75,11 +80,8 @@ function App() {
         const key = `components-key-${idx}`;
 
         return (
-          <div
-            key={key}
-            className="min-w-[1024px] w-full min-h-[200px] h-[20vh] flex justify-center items-center border-2"
-          >
-            <div className="grid grid-flow-col gap-14">{components}</div>
+          <div key={key} className={styles.container}>
+            <div className={styles.component}>{components}</div>
           </div>
         );
       })}
